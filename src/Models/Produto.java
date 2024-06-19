@@ -1,3 +1,4 @@
+package Models;
 
 public class Produto 
 {
@@ -11,7 +12,7 @@ public class Produto
         this.valorProduto = valorProduto;
         this.quantidadeEstoque = quantidadeEstoque;
     }
-    
+
     private void comprar(Produto produto, Usuario usuario) throws Exception
     {
         double saldo = usuario.getSaldo();
