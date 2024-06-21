@@ -13,18 +13,6 @@ public class Produto
         this.quantidadeEstoque = quantidadeEstoque;
     }
 
-    private void comprar(Produto produto, Usuario usuario) throws Exception
-    {
-        double saldo = usuario.getSaldo();
-        if(produto.getValorProduto() <= saldo)
-        {
-            saldo = saldo - produto.getValorProduto();
-            usuario.setSaldo(saldo);
-            return;
-        }
-        throw new Exception("Saldo insuficiente");
-    }
-
     public String getNomeProduto() 
     {
         return nomeProduto;

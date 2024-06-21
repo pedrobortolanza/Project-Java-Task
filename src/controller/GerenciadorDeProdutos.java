@@ -20,12 +20,21 @@ public abstract class GerenciadorDeProdutos
         try (FileWriter fw = new FileWriter(ARQUIVO, true);
              BufferedWriter bw = new BufferedWriter(fw)) {
 
-            bw.write(produto.getNomeProduto() + "," +
-                     produto.getValorProduto() + "," +
-                     produto.getQuantidadeEstoque() + "\n");
+            bw.write(produto.toString());
 
         }
+    }
 
+    public static void reescreverArquivo(ArrayList<Produto> listaProdutos) throws IOException 
+    {
+
+        try (FileWriter fw = new FileWriter(ARQUIVO); BufferedWriter bw = new BufferedWriter(fw)) 
+        {
+            for(Produto produto : listaProdutos)
+            {
+                bw.write(produto.toString());
+            }
+        }
     }
 
     public static ArrayList<Produto> listarProdutos() throws IOException, Exception {
