@@ -39,6 +39,7 @@ public class Compra
                                 double resultado = saldo - valorProduto;
 
                                 usuario.setSaldo(resultado);
+                                valorTotal = valorTotal + valorProduto;
                                 produtoLista.setQuantidadeEstoque(produtoLista.getQuantidadeEstoque() - 1);
                             }
                             else

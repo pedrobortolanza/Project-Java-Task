@@ -18,9 +18,7 @@ public abstract class HistoricoDeCompras {
         try (FileWriter fw = new FileWriter(ARQUIVO, true);
              BufferedWriter bw = new BufferedWriter(fw)) {
 
-            bw.write(compra.getValorTotal() + "," +
-                     compra.getCarrinho() + "," +
-                     compra.getDataHoraCompra() + "\n");
+            bw.write(compra.toString());
 
         }
 
