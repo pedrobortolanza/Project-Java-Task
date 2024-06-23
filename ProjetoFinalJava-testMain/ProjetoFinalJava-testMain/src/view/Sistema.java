@@ -5,9 +5,7 @@ import controller.HistoricoDeCompras;
 import model.Compra;
 import model.Produto;
 import model.Usuario;
-import view.Console;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class Sistema {
@@ -15,8 +13,24 @@ public class Sistema {
     private Usuario usuario;
 
     public Sistema() {
-        // login do usuário
-        this.usuario = new Usuario("admin", "admin");
+        while (true) {
+            System.out.print("Nome de usuário: ");
+            String nome = Console.lerString();
+            System.out.print("Senha: ");
+            String senha = Console.lerString();
+
+            this.usuario = new Usuario(nome, senha);
+            try {
+                if (this.usuario.login(nome, senha)) {
+                    System.out.println("Login realizado com sucesso!");
+                    break;
+                } else {
+                    System.out.println("Nome de usuário ou senha incorretos. Tente novamente.");
+                }
+            } catch (Exception e) {
+                System.out.println("Erro ao realizar login: " + e.getMessage());
+            }
+        }
     }
 
     public void cadastrarProduto() {
