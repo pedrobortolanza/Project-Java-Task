@@ -100,12 +100,17 @@ public class Compra
     private String lerCarrinho()
     {
         StringBuilder sb = new StringBuilder();
+        sb.append("Produtos no carrinho: \n");
 
         for(Produto produto : carrinho)
         {
-            sb.append("Produtos no carrinho: \n");
             sb.append(produto.toString());
             sb.append("\n");
+            
+            if (sb.length() > 0 && sb.charAt(sb.length() - 1) == '\n') 
+            {
+                sb.deleteCharAt(sb.length() - 1);
+            }
         }
         return sb.toString();
     }
