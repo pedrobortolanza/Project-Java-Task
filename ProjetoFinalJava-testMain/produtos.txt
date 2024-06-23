@@ -1,0 +1,3 @@
+
+Nome do Produto: chocolate, Valor: 12.0, Quantidade em estoque: 5
+Nome do Produto: sopa, Valor: 50.0, Quantidade em estoque: 10
