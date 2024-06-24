@@ -36,7 +36,7 @@ public class Usuario
         this.saldo = saldo;
     }
 
-    protected boolean login(String nome, String senha) throws IOException
+    public boolean login(String nome, String senha) throws IOException
     {
         String nomeUsuario = this.nome;
         String senhaUsuario = this.senha;

@@ -2,19 +2,18 @@ package model;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-
 import controller.GerenciadorDeProdutos;
 
 public class Compra 
 {
     private double valorTotal;
-    private ArrayList<Produto> carrinho;
+    private static ArrayList<Produto> carrinho;
     private LocalDateTime dataHoraCompra;
 
     public Compra(double valorTotal, ArrayList<Produto> carrinho) 
     {
         this.valorTotal = valorTotal;
-        this.carrinho = carrinho;
+        Compra.carrinho = carrinho;
         this. dataHoraCompra = LocalDateTime.now();
     }
 
@@ -132,7 +131,7 @@ public class Compra
 
     public void setCarrinho(ArrayList<Produto> carrinho) 
     {
-        this.carrinho = carrinho;
+        Compra.carrinho = carrinho;
     }
 
     public LocalDateTime getDataHoraCompra() 

@@ -1,0 +1,4 @@
+
+Nome do Produto: arroz, Valor: 10.0, Quantidade em estoque: 500
+Nome do Produto: arroz, Valor: 10.0, Quantidade em estoque: 100
+Nome do Produto: arroz, Valor: 10.0, Quantidade em estoque: 40

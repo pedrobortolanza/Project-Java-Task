@@ -6,8 +6,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import model.Produto;
 
@@ -106,16 +104,4 @@ public abstract class GerenciadorDeProdutos
         }
     }
 
-     public static List<Produto> buscarPorValor(double valorProduto) throws IOException, Exception {
-        return listarProdutos().stream()
-                .filter(produto -> produto.getValorProduto() == valorProduto)
-                .collect(Collectors.toList());
-    }
-
-    public static List<Produto> buscarPorQuantidadeEstoque(int quantidadeEstoque) throws IOException, Exception {
-        return listarProdutos().stream()
-                .filter(produto -> produto.getQuantidadeEstoque() == quantidadeEstoque)
-                .collect(Collectors.toList());
-    }
-    
 }

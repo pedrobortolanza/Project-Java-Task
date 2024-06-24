@@ -23,7 +23,9 @@ public abstract class HistoricoDeCompras {
         }
 
     }
-    public static ArrayList<Compra> listarCompras() throws IOException, Exception {
+    public static String listarCompras() throws IOException, Exception {
+
+        StringBuilder sb = new StringBuilder();
 
         ArrayList<Compra> listaCompras = new ArrayList<>();
 
@@ -31,18 +33,22 @@ public abstract class HistoricoDeCompras {
              BufferedReader br = new BufferedReader(fr)) {
 
                 String linha;
+
                 while ((linha = br.readLine()) != null) {
                     
-                    Compra compra = Compra.fromString(linha);
-                    listaCompras.add(compra);
+                    sb.append(linha);
+                    sb.append("\n");
+                    
+                    if (sb.length() > 0 && sb.charAt(sb.length() - 1) == '\n') 
+                    {
+                        sb.deleteCharAt(sb.length() - 1);
+                    }
                 }
         } 
 
         if (listaCompras.isEmpty()) {
             throw new Exception("\nNão há produtos cadastrados");
         }
-
-        return listaCompras;
-
+        return sb.toString();
     }
 }
