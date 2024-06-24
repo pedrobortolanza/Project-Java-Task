@@ -17,7 +17,7 @@ public class Compra
         this. dataHoraCompra = LocalDateTime.now();
     }
 
-    private void comprar(Usuario usuario) throws Exception
+    public void comprar(Usuario usuario) throws Exception
     {
         try
         {

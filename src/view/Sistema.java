@@ -10,22 +10,22 @@ import java.util.ArrayList;
 
 public class Sistema {
 
-    private Usuario usuario;
+    private static Usuario usuario = new Usuario("admin", "123");
 
-    public Sistema() {
+    public static boolean loginSistema() {
         while (true) {
             System.out.print("Nome de usuário: ");
             String nome = Console.lerString();
             System.out.print("Senha: ");
             String senha = Console.lerString();
 
-            this.usuario = new Usuario(nome, senha);
             try {
-                if (this.usuario.login(nome, senha)) {
-                    System.out.println("Login realizado com sucesso!");
-                    break;
+                if (usuario.login(nome, senha)) {
+                    System.out.println("Administrador logado com sucesso!");
+                    return true;
                 } else {
-                    System.out.println("Nome de usuário ou senha incorretos. Tente novamente.");
+                    System.out.println("Usuário logado com sucesso!.");
+                    return false;
                 }
             } catch (Exception e) {
                 System.out.println("Erro ao realizar login: " + e.getMessage());
@@ -33,7 +33,7 @@ public class Sistema {
         }
     }
 
-    public void cadastrarProduto() {
+    public static void cadastrarProduto() {
         try {
             System.out.print("Nome do Produto: ");
             String nome = Console.lerString();
@@ -51,10 +51,11 @@ public class Sistema {
         }
     }
 
-    public void listarProdutos() {
+    public static void listarProdutos() {
         try {
             ArrayList<Produto> produtos = GerenciadorDeProdutos.listarProdutos();
             System.out.println("\n--- Lista de Produtos ---");
+
             for (Produto produto : produtos) {
                 System.out.println(produto);
             }
@@ -63,7 +64,43 @@ public class Sistema {
         }
     }
 
-    public void realizarCompra() {
+    private static void excluirProduto() 
+    {
+        System.out.println("\nExcluir Produto");
+        System.out.print("Nome do Produto: ");
+        String nomeProduto = Console.lerString();
+        try 
+        {
+
+            GerenciadorDeProdutos.excluirProduto(nomeProduto);
+            System.out.println("\nProduto excluído com sucesso!");
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private static void buscarProduto() {
+
+        System.out.println("\nBuscar Produtos");
+        System.out.print("Nome do Produto: ");
+        String nomeProduto = Console.lerString();
+
+        try {
+
+            Produto produto = GerenciadorDeProdutos.buscarProduto(nomeProduto);
+
+            if (produto != null) {
+               System.out.println("\nProduto: " + produto);
+            } else {
+                System.out.println("\nProduto não encontrado.\n");
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public static void realizarCompra() {
         try {
             Compra compra = new Compra(0, new ArrayList<>());
 
@@ -75,7 +112,7 @@ public class Sistema {
                     case 1:
                         System.out.print("Nome do Produto: ");
                         String nomeProduto = Console.lerString();
-                        Compra.adicionarNoCarrinho(nomeProduto);
+                        compra.adicionarNoCarrinho(nomeProduto);
                         break;
                     case 2:
                         System.out.print("Nome do Produto: ");
@@ -109,7 +146,7 @@ public class Sistema {
         }
     }
 
-    private void exibirMenuCompra() {
+    private static void exibirMenuCompra() {
         System.out.println("\n--- Menu de Compra ---");
         System.out.println("1. Adicionar Produto ao Carrinho");
         System.out.println("2. Remover Produto do Carrinho");
@@ -117,4 +154,83 @@ public class Sistema {
         System.out.println("4. Cancelar");
         System.out.print("Escolha uma opção: ");
     }
+
+    private static void exibirMenuAdmin() {
+        System.out.println("\n--- Sistema de Mercado ---");
+        System.out.println("1. Cadastrar Produto");
+        System.out.println("2. Buscar Produtos");
+        System.out.println("3. Excluir Produtos");
+        System.out.println("4. Listar Produtos");
+        System.out.println("5. Realizar Compra");
+        System.out.println("6. Ver Histórico de Compras");
+        System.out.println("7. Sair");
+        System.out.print("Escolha uma opção: ");
+    }
+
+    private static void exibirMenuUsuario() {
+        System.out.println("\n--- Sistema de Mercado ---");
+        System.out.println("1. Buscar Produtos");
+        System.out.println("2. Listar Produtos");
+        System.out.println("3. Realizar Compra");
+        System.out.println("4. Sair");
+        System.out.print("Escolha uma opção: ");
+    }
+
+    public static void executar() {
+        if (loginSistema()) {
+            while (true) {
+                exibirMenuAdmin();
+                int opcao = Console.lerInt();
+
+                switch (opcao) {
+                    case 1:
+                        cadastrarProduto();
+                        break;
+                    case 2:
+                        buscarProduto();
+                        break;
+                    case 3:
+                        excluirProduto();
+                        break;
+                    case 4:
+                        listarProdutos();
+                        break;
+                    case 5:
+                        realizarCompra();
+                        break;
+                    case 6:
+                        listarCompras();
+                        break;
+                    case 7:
+                        System.out.println("Saindo...");
+                        return;
+                    default:
+                        System.out.println("Opção inválida! Tente novamente.");
+                }
+            }
+        } else {
+            while (true) {
+                exibirMenuUsuario();
+                int opcao = Console.lerInt();
+
+                switch (opcao) {
+                    case 1:
+                        buscarProduto();
+                        break;
+                    case 2:
+                        listarProdutos();
+                        break;
+                    case 3:
+                        realizarCompra();
+                        break;
+                    case 4:
+                        System.out.println("Saindo...");
+                        return;
+                    default:
+                        System.out.println("Opção inválida! Tente novamente.");
+                }
+            }
+        }
+    }
+
 }
