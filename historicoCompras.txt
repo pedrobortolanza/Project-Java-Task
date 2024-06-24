@@ -1,0 +1,2 @@
+Produtos no carrinho: 
+Valor total: 0.0Data e hora da compra: 2024-06-24T10:52:01.751690600
