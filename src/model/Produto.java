@@ -4,13 +4,12 @@ public class Produto
 {
     private String nomeProduto;
     private double valorProduto;
-    private int quantidadeEstoque;
+    
 
-    public Produto(String nomeProduto, double valorProduto, int quantidadeEstoque) 
+    public Produto(String nomeProduto, double valorProduto) 
     {
         this.nomeProduto = nomeProduto;
         this.valorProduto = valorProduto;
-        this.quantidadeEstoque = quantidadeEstoque;
     }
 
     public String getNomeProduto() 
@@ -33,28 +32,17 @@ public class Produto
         this.valorProduto = valorProduto;
     }
 
-    public int getQuantidadeEstoque() 
-    {
-        return quantidadeEstoque;
-    }
-
-    public void setQuantidadeEstoque(int quantidadeEstoque) 
-    {
-        this.quantidadeEstoque = quantidadeEstoque;
-    }
-
     @Override
     public String toString() 
     {
-        return "\nNome do Produto: " + nomeProduto + ", " + 
-               "Valor: " + valorProduto + ", " + 
-               "Quantidade em estoque: " + quantidadeEstoque;
+        return nomeProduto + ", " + 
+               valorProduto + "\n";
     }
 
     public static Produto fromString(String linha)
     {
         String[] informacoesProduto = linha.split(", ");
 
-        return new Produto(informacoesProduto[0],Double.parseDouble(informacoesProduto[1]), Integer.parseInt(informacoesProduto[2]));
+        return new Produto(informacoesProduto[0],Double.parseDouble(informacoesProduto[1]));
     }
 }

@@ -17,12 +17,11 @@ public class Compra
         this. dataHoraCompra = LocalDateTime.now();
     }
 
-    public void comprar(Usuario usuario) throws Exception
+    public void comprar() throws Exception
     {
         try
         {
             ArrayList<Produto> listaProdutos = GerenciadorDeProdutos.listarProdutos();
-            double saldo = usuario.getSaldo();
            
             for(Produto produtoCarrinho : carrinho)
             {
@@ -30,26 +29,7 @@ public class Compra
                 {
                     if(produtoCarrinho.equals(produtoLista))
                     {   
-                        if(produtoLista.getQuantidadeEstoque() > 0)
-                        {
-                            if(saldo >= produtoLista.getValorProduto())
-                            {
-                                double valorProduto = produtoLista.getValorProduto();
-                                double resultado = saldo - valorProduto;
-
-                                usuario.setSaldo(resultado);
-                                valorTotal = valorTotal + valorProduto;
-                                produtoLista.setQuantidadeEstoque(produtoLista.getQuantidadeEstoque() - 1);
-                            }
-                            else
-                            {
-                                throw new Exception("Usuário está sem saldo!");
-                            }
-                        }
-                        else
-                        {
-                            throw new Exception("O produto está sem estoque.\n");
-                        }
+                        valorTotal = valorTotal + produtoLista.getValorProduto();
                     }
                 }
             }
@@ -96,7 +76,7 @@ public class Compra
         throw new Exception( nomeProduto + "não presente no carrinho.");
     }
 
-    private String lerCarrinho()
+    public String lerCarrinho()
     {
         StringBuilder sb = new StringBuilder();
         sb.append("Produtos no carrinho: \n");
@@ -105,11 +85,14 @@ public class Compra
         {
             sb.append(produto.toString());
             sb.append("\n");
-            
-            if (sb.length() > 0 && sb.charAt(sb.length() - 1) == '\n') 
-            {
+        }
+        if (sb.length() > 0 && sb.charAt(sb.length() - 1) == '\n') 
+        {
                 sb.deleteCharAt(sb.length() - 1);
-            }
+        }
+        if(carrinho.isEmpty())
+        {
+            return "\nCarrinho vazio";
         }
         return sb.toString();
     }
@@ -147,7 +130,7 @@ public class Compra
     @Override
     public String toString() 
     {
-        return lerCarrinho() + "Valor total: " + valorTotal + "Data e hora da compra: " + dataHoraCompra;
+        return lerCarrinho() + "Valor total: " + valorTotal + " Data e hora da compra: " + dataHoraCompra + "\n";
     }
     //Removi o From string pois não vejo necessidade de transfromar o histórico de compra em um array
 }

@@ -39,10 +39,8 @@ public class Sistema {
             String nome = Console.lerString();
             System.out.print("Valor do Produto: ");
             double valor = Console.lerFloat();
-            System.out.print("Quantidade em Estoque: ");
-            int quantidade = Console.lerInt();
 
-            Produto produto = new Produto(nome, valor, quantidade);
+            Produto produto = new Produto(nome, valor);
             GerenciadorDeProdutos.cadastrarProduto(produto);
 
             System.out.println("Produto cadastrado com sucesso!");
@@ -120,11 +118,15 @@ public class Sistema {
                         compra.removerDoCarrinho(nomeProdutoRemover);
                         break;
                     case 3:
-                        compra.comprar(usuario);
+                        compra.comprar();
                         HistoricoDeCompras.salvarCompra(compra);
                         System.out.println("Compra realizada com sucesso!");
                         return;
                     case 4:
+                        System.out.print("Visualizar carrinho: ");
+                        System.out.println(compra.lerCarrinho());
+                        break;
+                    case 5:
                         System.out.println("Compra cancelada.");
                         return;
                     default:
@@ -151,7 +153,8 @@ public class Sistema {
         System.out.println("1. Adicionar Produto ao Carrinho");
         System.out.println("2. Remover Produto do Carrinho");
         System.out.println("3. Finalizar Compra");
-        System.out.println("4. Cancelar");
+        System.out.println("4. Visualizar Carrinho");
+        System.out.println("5. Cancelar");
         System.out.print("Escolha uma opção: ");
     }
 

@@ -98,8 +98,7 @@ public abstract class GerenciadorDeProdutos
             for (Produto produto : listaProdutos) {
 
                 bw.write(produto.getNomeProduto() + "," +
-                         produto.getValorProduto() + "," +
-                         produto.getQuantidadeEstoque() + "\n");
+                         produto.getValorProduto() + "\n");
             }
         }
     }
